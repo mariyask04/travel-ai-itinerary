@@ -3,7 +3,7 @@ import Itinerary from '../models/Itinerary.model.js';
 
 import { nanoid } from 'nanoid';
 
-import generateItinerary from '../services/gemini.service.js';
+import { generateItinerary } from '../services/gemini.service.js';
 
 const createItinerary = async (req, res) => {
     try {

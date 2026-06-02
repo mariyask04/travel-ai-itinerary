@@ -22,10 +22,8 @@ const registerUser = async (req, res) => {
             email,
             password: hashedPassword
         })
-        const token = generateToken(user._id);
         res.status(201).json({
             success: true,
-            token,
             user: {
                 id: user._id,
                 name: user.name,
