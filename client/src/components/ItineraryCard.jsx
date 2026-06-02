@@ -14,7 +14,7 @@ const ItineraryCard = ({ itinerary }) => {
             </p>
             <div className="mt-4">
                 <a
-                    href={`/shared/${itinerary.shareId}`}
+                    href={`/shared/${itinerary.sharedId}`}
                     target="_blank"
                     className="text-blue-600"
                 >

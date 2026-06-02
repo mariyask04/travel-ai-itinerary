@@ -6,7 +6,7 @@ const bookingSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
-    filename: {
+    fileName: {
         type: String,
         required: true
     },

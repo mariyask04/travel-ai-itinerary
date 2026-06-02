@@ -23,7 +23,7 @@ const itinerarySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    shareId: {
+    sharedId: {
         type: String,
         unique: true,
     },
