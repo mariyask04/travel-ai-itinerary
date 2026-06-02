@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import authRoutes from './routes/auth.router.js';
 import uploadRoutes from './routes/upload.router.js';
+import itineraryRoutes from './routes/itinerary.router.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -25,6 +26,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/api/auth', authRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/itinerary', itineraryRoutes);
 
 const PORT = process.env.PORT || 5000;
 
