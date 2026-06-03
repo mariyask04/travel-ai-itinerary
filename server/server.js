@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: [
         "http://localhost:3000",
-        "https://vercel-app.vercel.app"
+        "https://travel-ai-itinerary.vercel.app/"
     ],
     credentials: true
 }));
