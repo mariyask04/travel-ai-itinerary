@@ -52,7 +52,6 @@ const getItineraryById = async (req, res) => {
 
 const getUserItineraries = async (req, res) => {
     try {
-        console.log(req.user);
         const itineraries = await Itinerary
             .find({ user: req.user._id })
             .populate("booking")
