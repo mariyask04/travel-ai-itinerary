@@ -7,6 +7,7 @@ import Itinerary from '../models/Itinerary.model.js';
 import { nanoid } from 'nanoid';
 
 const uploadBooking = async (req, res) => {
+    console.log("FILE RECEIVED:", req.file);
     try {
         if (!req.file) {
             return res.status(400).json({
@@ -23,6 +24,10 @@ const uploadBooking = async (req, res) => {
             extractedText = await extractPdfText(fileUrl);
         } else {
             extractedText = await extractImageText(fileUrl);
+        }
+        
+        if (!extractedText) {
+            extractedText = "No text could be extracted from PDF";
         }
 
         const booking = await Booking.create({
