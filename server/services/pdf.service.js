@@ -1,14 +1,16 @@
-import fs from 'fs';
-import { PDFParse } from "pdf-parse";
+import axios from "axios";
+import * as pdfParse from "pdf-parse/lib/pdf-parse.js";
 
-const extractPdfText = async (filePath) => {
-    const buffer = fs.readFileSync(filePath);
-    const parser = new PDFParse({
-        data:buffer,
+const extractPdfText = async (fileUrl) => {
+    const res = await axios.get(fileUrl, {
+        responseType: "arraybuffer",
     });
-    const result = await parser.getText();
-    await parser.destroy();
-    return result.text;
-}
+
+    const buffer = Buffer.from(res.data);
+
+    const data = await pdfParse.default(buffer);
+
+    return data.text;
+};
 
 export default extractPdfText;

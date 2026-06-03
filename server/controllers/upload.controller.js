@@ -8,7 +8,6 @@ import { nanoid } from 'nanoid';
 
 const uploadBooking = async (req, res) => {
     try {
-
         if (!req.file) {
             return res.status(400).json({
                 success: false,
@@ -18,16 +17,18 @@ const uploadBooking = async (req, res) => {
 
         let extractedText = "";
 
+        const fileUrl = req.file.path;
+
         if (req.file.mimetype === "application/pdf") {
-            extractedText = await extractPdfText(req.file.path);
+            extractedText = await extractPdfText(fileUrl);
         } else {
-            extractedText = await extractImageText(req.file.path);
+            extractedText = await extractImageText(fileUrl);
         }
 
         const booking = await Booking.create({
             user: req.user._id,
-            fileName: req.file.filename,
-            filePath: req.file.path,
+            fileName: req.file.originalname,
+            fileUrl,
             fileType: req.file.mimetype,
             extractedText,
         });
@@ -37,10 +38,9 @@ const uploadBooking = async (req, res) => {
         try {
             aiResponse = await generateItinerary(extractedText);
         } catch (error) {
-            console.log("Gemini Error:", error.message);
+            console.log("Groq Error:", error.message);
 
-            aiResponse =
-                "AI itinerary generation failed. Please try again later.";
+            aiResponse = "AI itinerary generation failed. Please try again later.";
         }
 
         const itinerary = await Itinerary.create({
@@ -55,11 +55,8 @@ const uploadBooking = async (req, res) => {
             booking,
             itinerary,
         });
-
     } catch (error) {
-
-        console.log("UPLOAD ERROR");
-        console.log(error);
+        console.log("UPLOAD ERROR", error);
 
         return res.status(500).json({
             success: false,
