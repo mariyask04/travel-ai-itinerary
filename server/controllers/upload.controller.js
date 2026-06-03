@@ -1,7 +1,7 @@
 import extractPdfText from '../services/pdf.service.js';
 import extractImageText from '../services/ocr.service.js';
 
-import Booking from '../models/booking.model.js';
+import Booking from '../models/Booking.model.js';
 import { generateItinerary } from '../services/groq.service.js';
 import Itinerary from '../models/Itinerary.model.js';
 import { nanoid } from 'nanoid';
